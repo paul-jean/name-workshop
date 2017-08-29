@@ -1,0 +1,18 @@
+.name_workshop {
+    text-align: center;
+    max-width: 200px;
+}
+
+.lower_column {
+    clear: both;
+    float: left;
+}
+
+.clickable_letter, .letter_blank {
+    clear: both;
+    float: left;
+    border: solid 1px gray;
+    width: 32px;
+    height: 23px;
+    margin-top: 2px;
+}
