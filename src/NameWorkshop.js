@@ -34,9 +34,14 @@ class NameWorkshop extends Component {
         return (
             <ClickableLetter
                 letter = {letter}
-                onClick={this.handleLetterClick(letter, columnIndex, letterIndex)}
+                onClick={
+                    (e) => {
+                        e.preventDefault();
+                        this.handleLetterClick(letter, columnIndex, letterIndex)
+                    }
+                }
                 key={key}
-            >
+            />
         );
     }
 
@@ -54,24 +59,24 @@ class NameWorkshop extends Component {
         var letterColumn = [];
         // TODO: replace this loop with a map
         // insert consonants
-        var i, key, letter;
+        var i, letter;
         for (i=0; i < this.consonants.length; i++) {
             letter = this.consonants[i];
-            key = `${ letter }${ columnIndex }`;
             letterColumn.push(
-                renderLetter(letter, columnIndex, i)
+                this.renderLetter(letter, columnIndex, i)
             );
         }
 
+        // insert the blank
         letterColumn.push(
-            this.renderBlank(columnIndex);
+            this.renderBlank(columnIndex)
         );
 
+        // insert vowels
         for (i=0; i < this.vowels.length; i++) {
             letter = this.vowels[i];
-            key = `${ letter }${ columnIndex }`;
             letterColumn.push(
-                renderLetter(letter, columnIndex, i)
+                this.renderLetter(letter, columnIndex, i)
             );
         }
 
@@ -93,7 +98,7 @@ class NameWorkshop extends Component {
         // divide the letters in the name into columns
         for (var i=0; i < this.nameLength; i++) {
             letterColumns.push(
-                renderColumn(i);
+                this.renderColumn(i)
             );
         }
         return (
@@ -113,8 +118,9 @@ class ClickableLetter extends Component {
         return (
             <div
                 onClick={this.props.onClick}
-                className="clickable_letter">
-                    <span> {this.props.letter} </span>
+                className="clickable_letter"
+            >
+                    <a href=""> {this.props.letter} </a>
             </div>
         );
     }
@@ -123,7 +129,7 @@ class ClickableLetter extends Component {
 class LetterBlank extends Component {
     render() {
         return (
-            <div className="letter_blank"> <span> &nbsp; </span> </div>
+            <div className="letter_blank"> <span> {this.props.selectedLetter} </span> </div>
         );
     }
 };
